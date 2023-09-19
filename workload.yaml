@@ -1,0 +1,15 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: svelete-app
+  namespace: develop
+  labels:
+    app.kubernetes.io/part-of: svelete-app
+    apps.tanzu.vmware.com/workload-type: web
+spec:
+  source:
+    git:
+      url: https://github.com/tsfrt/svelteKit-test.git
+      ref:
+        tag: main
