@@ -35,10 +35,7 @@ export const actions = {
 
 		let connection;
 		let b = await Bindings.fromServiceBindingRoot();
-		console.log(b)
-		b = await Bindings.filter(b, 'bindings');
-		b = await Bindings.filter(b, 'oracle-binding');
-		console.log(b)
+		b = b[0];
 		if (b == undefined || b.length != 1) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
 		}
