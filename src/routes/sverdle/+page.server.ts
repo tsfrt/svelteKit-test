@@ -48,6 +48,8 @@ export const actions = {
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		};
 
+		console.log(dbConfig);
+		
 		try {
 			// Get a non-pooled connection
 			connection = await oracledb.getConnection(dbConfig);
