@@ -41,9 +41,9 @@ export const actions = {
 		}
 
 		const dbConfig = {
-			user: Bindings.get(b[0], 'username'),
-			password: Bindings.get(b[0], 'password'),
-			connectString: Bindings.get(b[0], 'connectionString'),
+			user: Bindings.get(b, 'username'),
+			password: Bindings.get(b, 'password'),
+			connectString: Bindings.get(b, 'connectionString'),
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		}
 
