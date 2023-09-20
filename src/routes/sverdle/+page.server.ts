@@ -45,7 +45,6 @@ export const actions = {
 		};
 
 		console.log(dbConfig);
-		
 		try {
 			// Get a non-pooled connection
 			connection = await oracledb.getConnection(dbConfig);
