@@ -34,8 +34,9 @@ export const actions = {
 	db: async () => {
 
 		let connection;
-		let ob = Bindings.find(b, 'oracle-binding')
-		console.log(ob)
+		let b = await Bindings.fromServiceBindingRoot();
+		let ob = Bindings.find(b, 'oracle-binding');
+		console.log(ob);
 		if (ob == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
 		}
@@ -45,7 +46,7 @@ export const actions = {
 			password: Bindings.get(ob[0], 'password'),
 			connectString: Bindings.get(ob[0], 'connectionString'),
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
-		}
+		};
 
 		try {
 			// Get a non-pooled connection
