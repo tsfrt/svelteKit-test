@@ -1,6 +1,8 @@
 import { fail } from '@sveltejs/kit';
 import { Game } from './game';
 import type { PageServerLoad, Actions } from './$types';
+import * as Bindings from '@nebhale/service-bindings';
+import * as oracledb from 'oracledb';
 
 export const load = (({ cookies }) => {
 	const game = new Game(cookies.get('sverdle'));
@@ -29,6 +31,41 @@ export const actions = {
 	 * Modify game state in reaction to a keypress. If client-side JavaScript
 	 * is available, this will happen in the browser instead of here
 	 */
+	db: async () => {
+
+		let connection;
+		let b = await Bindings.fromServiceBindingRoot();
+		b = await Bindings.filter(b, 'oracle-binding');
+		if (b == undefined || b.length != 1) {
+			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
+		}
+
+		const dbConfig = {
+			user: Bindings.get(b[0], 'username'),
+			password: Bindings.get(b[0], 'password'),
+			connectString: Bindings.get(b[0], 'connectionString'),
+			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
+		}
+
+		try {
+			// Get a non-pooled connection
+			connection = await oracledb.getConnection(dbConfig);
+
+			console.log('Connection was successful!');
+
+		} catch (err) {
+			console.error(err);
+		} finally {
+			if (connection) {
+				try {
+					await connection.close();
+				} catch (err) {
+					console.error(err);
+				}
+			}
+		}
+	},
+	
 	update: async ({ request, cookies }) => {
 		const game = new Game(cookies.get('sverdle'));
 

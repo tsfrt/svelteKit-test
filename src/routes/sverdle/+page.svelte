@@ -156,6 +156,10 @@
 					back
 				</button>
 
+				<button data-key="db" class="db" formaction="?/db">
+					Does the DB work?
+				</button>
+
 				{#each ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'] as row}
 					<div class="row">
 						{#each row as letter}
@@ -363,6 +367,13 @@
 
 	.keyboard button[data-key='enter']:disabled {
 		opacity: 0.5;
+	}
+
+	.db {
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.5);
+		border-radius: 2px;
+		border: none;
 	}
 
 	.restart {
