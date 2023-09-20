@@ -35,15 +35,15 @@ export const actions = {
 
 		let connection;
 		let ob = Bindings.find(b, 'oracle-binding')
-		console.log(ob)
+		console.log(ob[0])
 		if (ob == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
 		}
 
 		const dbConfig = {
-			user: Bindings.get(ob, 'username'),
-			password: Bindings.get(ob, 'password'),
-			connectString: Bindings.get(ob, 'connectionString'),
+			user: Bindings.get(ob[0], 'username'),
+			password: Bindings.get(ob[0], 'password'),
+			connectString: Bindings.get(ob[0], 'connectionString'),
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		}
 
