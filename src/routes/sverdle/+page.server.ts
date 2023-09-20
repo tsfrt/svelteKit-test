@@ -36,7 +36,8 @@ export const actions = {
 		let connection;
 		let b = await Bindings.fromServiceBindingRoot();
 		b = b[0];
-		if (b == undefined || b.length != 1) {
+		console.log(b)
+		if (b == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
 		}
 
