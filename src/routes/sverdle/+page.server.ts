@@ -34,16 +34,16 @@ export const actions = {
 	db: async () => {
 
 		let connection;
-		let b = await Bindings.fromServiceBindingRoot();
-		console.log(b)
-		if (b == undefined) {
+		let ob = Bindings.find(b, 'oracle-binding')
+		console.log(ob)
+		if (ob == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
 		}
 
 		const dbConfig = {
-			user: Bindings.get(b, 'username'),
-			password: Bindings.get(b, 'password'),
-			connectString: Bindings.get(b, 'connectionString'),
+			user: Bindings.get(ob, 'username'),
+			password: Bindings.get(ob, 'password'),
+			connectString: Bindings.get(ob, 'connectionString'),
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		}
 
