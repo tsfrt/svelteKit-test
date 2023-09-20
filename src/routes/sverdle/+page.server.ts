@@ -34,6 +34,7 @@ export const actions = {
 	db: async () => {
 
 		let connection;
+		console.log(process.env.SERVICE_BINDING_ROOT);
 		const rawBindingData = serviceBindings.getBinding();
 		console.log(rawBindingData);
 
