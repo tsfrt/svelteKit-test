@@ -35,9 +35,9 @@ export const actions = {
 
 		let connection;
 		let ob = Bindings.find(b, 'oracle-binding')
-		console.log(ob[0])
+		console.log(ob)
 		if (ob == undefined) {
-			throw Error(`Incorrect number of PostgreSQL drivers: ${b == undefined ? "0" : b.length}`)
+			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
 		}
 
 		const dbConfig = {
