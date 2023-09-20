@@ -1,7 +1,7 @@
 import { fail } from '@sveltejs/kit';
 import { Game } from './game';
 import type { PageServerLoad, Actions } from './$types';
-import * as Bindings from '@nebhale/service-bindings';
+import * as serviceBindings from 'kube-service-bindings';
 import * as oracledb from 'oracledb';
 
 export const load = (({ cookies }) => {
@@ -34,17 +34,13 @@ export const actions = {
 	db: async () => {
 
 		let connection;
-		let b = await Bindings.fromServiceBindingRoot();
-		let ob = Bindings.find(b, 'oracle-binding');
-		console.log(ob);
-		if (ob == undefined) {
-			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
-		}
+		const rawBindingData = serviceBindings.getBinding();
+		console.log(rawBindingData);
 
 		const dbConfig = {
-			user: Bindings.get(ob[0], 'username'),
-			password: Bindings.get(ob[0], 'password'),
-			connectString: Bindings.get(ob[0], 'connectionString'),
+			user: rawBindingData['oracle-binding']['username'],
+			password: rawBindingData['oracle-binding']['password'],
+			connectString: rawBindingData['oracle-binding']['connectionString'],
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		};
 
