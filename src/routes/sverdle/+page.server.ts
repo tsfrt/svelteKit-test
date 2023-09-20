@@ -64,7 +64,7 @@ export const actions = {
 			}
 		}
 	},
-	
+
 	update: async ({ request, cookies }) => {
 		const game = new Game(cookies.get('sverdle'));
 
