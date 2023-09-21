@@ -41,7 +41,8 @@ export const actions = {
 		if (ob == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
 		}
-
+		user = Bindings.get(ob, 'username');
+		console.log("user"+user);
 		const dbConfig = {
 			user: Bindings.get(ob, 'username'),
 			password: Bindings.get(ob, 'password'),
