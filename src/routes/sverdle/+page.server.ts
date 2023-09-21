@@ -33,6 +33,7 @@ export const actions = {
 	 */
 	db: async () => {
 
+		console.log("using @nebhale/service-bindings");
 		let connection;
 		let b = await Bindings.fromServiceBindingRoot();
 		let ob = Bindings.find(b, 'oracle-binding');
