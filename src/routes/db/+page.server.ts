@@ -34,8 +34,8 @@ export const load = (({ }) => {
                 `SELECT UNIQUE CLIENT_DRIVER
 				 FROM V$SESSION_CONNECT_INFO
 				 WHERE SID = SYS_CONTEXT('USERENV', 'SID')`);
-            console.log("CLIENT_DRIVER                 :", JSON.stringify(result.rows[0][0].replace(': ', '')));
-            return result;
+            console.log("CLIENT_DRIVER                 :", result.rows[0][0].replace(': ', ''));
+            return JSON.stringify(result);
         } catch (err) {
             console.error(err);
             return "Error connecting to DB";
