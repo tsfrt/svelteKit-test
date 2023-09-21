@@ -8,8 +8,9 @@ export const load = (({ }) => {
     async function connectionInfo() {
         console.log("using @nebhale/service-bindings");
         let connection;
+        const bindingName = process.env.DB_SERVICE_BINDING_NAME || "oracle-binding";
         let b = await Bindings.fromServiceBindingRoot();
-        let ob = await Bindings.find(b, 'oracle-binding');
+        let ob = await Bindings.find(b, bindingName);
         console.log(ob);
         if (ob == undefined) {
             return `No bindings found`;
