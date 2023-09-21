@@ -35,7 +35,7 @@ export const load = (({ }) => {
 				 FROM V$SESSION_CONNECT_INFO
 				 WHERE SID = SYS_CONTEXT('USERENV', 'SID')`);
             console.log("CLIENT_DRIVER                 :", result.rows[0][0].replace(': ', ''));
-            return JSON.stringify(result);
+            return JSON.stringify(result, undefined, 4);
         } catch (err) {
             console.error(err);
             return "Error connecting to DB";
@@ -52,6 +52,6 @@ export const load = (({ }) => {
 
     return {
         bindingName: bindingName,
-        connectionInfo: connectionInfo() 
+        connectionInfo: connectionInfo()
     };
 }) satisfies PageServerLoad;
