@@ -4,11 +4,11 @@ import * as Bindings from '@nebhale/service-bindings';
 import * as oracledb from 'oracledb';
 
 export const load = (({ }) => {
+    const bindingName = process.env.DB_SERVICE_BINDING_NAME || "oracle-binding";
 
     async function connectionInfo() {
         console.log("using @nebhale/service-bindings");
         let connection;
-        const bindingName = process.env.DB_SERVICE_BINDING_NAME || "oracle-binding";
         let b = await Bindings.fromServiceBindingRoot();
         let ob = await Bindings.find(b, bindingName);
         console.log(ob);
@@ -51,6 +51,7 @@ export const load = (({ }) => {
     }
 
     return {
+        bindingName: bindingName,
         connectionInfo: connectionInfo() 
     };
 }) satisfies PageServerLoad;
