@@ -19,5 +19,7 @@
 		type of services are available!
 	</p>
 
-	<p>"{data.connectionInfo}"</p>
+	<a class="how-to-play" href="https://servicebinding.io/">Service Binding for Kubernetes</a>
+
+	<pre>"{data.connectionInfo}"</pre>
 </div>

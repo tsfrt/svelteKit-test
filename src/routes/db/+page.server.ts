@@ -12,7 +12,7 @@ export const load = (({ }) => {
         let ob = await Bindings.find(b, 'oracle-binding');
         console.log(ob);
         if (ob == undefined) {
-            return "No bindings found";
+            return `No bindings found`;
         }
         const user = await Bindings.get(ob, 'username');
         console.log("user" + user);
