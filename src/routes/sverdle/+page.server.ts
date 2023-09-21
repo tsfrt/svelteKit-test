@@ -42,7 +42,7 @@ export const actions = {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
 		}
 		const user = await Bindings.get(ob, 'username');
-		console.log("user"+user);
+		console.log("user" + user);
 		const dbConfig = {
 			user: await Bindings.get(ob, 'username'),
 			password: await Bindings.get(ob, 'password'),
@@ -56,6 +56,11 @@ export const actions = {
 			connection = await oracledb.getConnection(dbConfig);
 
 			console.log('Connection was successful!');
+			const result = await connection.execute(
+				`SELECT UNIQUE CLIENT_DRIVER
+				 FROM V$SESSION_CONNECT_INFO
+				 WHERE SID = SYS_CONTEXT('USERENV', 'SID')`);
+			console.log("CLIENT_DRIVER                 :", result.rows[0][0].replace(': ', ''));
 
 		} catch (err) {
 			console.error(err);
