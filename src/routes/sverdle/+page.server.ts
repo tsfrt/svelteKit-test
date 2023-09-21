@@ -31,49 +31,6 @@ export const actions = {
 	 * Modify game state in reaction to a keypress. If client-side JavaScript
 	 * is available, this will happen in the browser instead of here
 	 */
-	db: async () => {
-		//why
-		console.log("using @nebhale/service-bindings");
-		let connection;
-		let b = await Bindings.fromServiceBindingRoot();
-		let ob = await Bindings.find(b, 'oracle-binding');
-		console.log(ob);
-		if (ob == undefined) {
-			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
-		}
-		const user = await Bindings.get(ob, 'username');
-		console.log("user" + user);
-		const dbConfig = {
-			user: await Bindings.get(ob, 'username'),
-			password: await Bindings.get(ob, 'password'),
-			connectString: await Bindings.get(ob, 'connectionString'),
-			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
-		};
-
-		console.log(dbConfig);
-		try {
-			// Get a non-pooled connection
-			connection = await oracledb.getConnection(dbConfig);
-
-			console.log('Connection was successful!');
-			const result = await connection.execute(
-				`SELECT UNIQUE CLIENT_DRIVER
-				 FROM V$SESSION_CONNECT_INFO
-				 WHERE SID = SYS_CONTEXT('USERENV', 'SID')`);
-			console.log("CLIENT_DRIVER                 :", result.rows[0][0].replace(': ', ''));
-
-		} catch (err) {
-			console.error(err);
-		} finally {
-			if (connection) {
-				try {
-					await connection.close();
-				} catch (err) {
-					console.error(err);
-				}
-			}
-		}
-	},
 
 	update: async ({ request, cookies }) => {
 		const game = new Game(cookies.get('sverdle'));

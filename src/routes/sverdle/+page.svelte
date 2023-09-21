@@ -156,9 +156,6 @@
 					back
 				</button>
 
-				<button data-key="db" class="db" formaction="?/db">
-					Does the DB work?
-				</button>
 
 				{#each ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'] as row}
 					<div class="row">
