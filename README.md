@@ -2,7 +2,7 @@
 
 This app demonstrates the configuration for running a SvelteKit app on TAP.  The app is configured to deploy on a Node runtime.  The app also detects service bindings to demonstrate mounting backing services.
 
-## Worklad config
+## Workload config
 
 This is the workload definition used to mount the service binding.  Set the `DB_SERVICE_BINDING_NAME` env var for the desired binding.
 
