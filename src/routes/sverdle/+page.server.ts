@@ -36,17 +36,17 @@ export const actions = {
 		console.log("using @nebhale/service-bindings");
 		let connection;
 		let b = await Bindings.fromServiceBindingRoot();
-		let ob = Bindings.find(b, 'oracle-binding');
+		let ob = await Bindings.find(b, 'oracle-binding');
 		console.log(ob);
 		if (ob == undefined) {
 			throw Error(`Incorrect number of PostgreSQL drivers: ${ob == undefined ? "0" : ob.length}`)
 		}
-		const user = Bindings.get(ob, 'username');
+		const user = await Bindings.get(ob, 'username');
 		console.log("user"+user);
 		const dbConfig = {
-			user: Bindings.get(ob, 'username'),
-			password: Bindings.get(ob, 'password'),
-			connectString: Bindings.get(ob, 'connectionString'),
+			user: await Bindings.get(ob, 'username'),
+			password: await Bindings.get(ob, 'password'),
+			connectString: await Bindings.get(ob, 'connectionString'),
 			externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
 		};
 
