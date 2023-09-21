@@ -32,7 +32,7 @@ export const actions = {
 	 * is available, this will happen in the browser instead of here
 	 */
 	db: async () => {
-
+		//why
 		console.log("using @nebhale/service-bindings");
 		let connection;
 		let b = await Bindings.fromServiceBindingRoot();
